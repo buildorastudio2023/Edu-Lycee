@@ -234,6 +234,8 @@
       text-align: center;
       transition: opacity 0.2s;
       width: 100%;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn:hover {
@@ -252,17 +254,26 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 2.5rem;
-      max-width: 850px;
+      max-width: 950px;
       margin: 0 auto;
     }
 
     .hidden { display: none !important; }
 
-    .lesson-paragraph {
-      line-height: 1.8;
-      color: #cbd5e1;
-      font-size: 1.05rem;
-      margin-bottom: 1.25rem;
+    .pdf-viewer-container {
+      width: 100%;
+      height: 700px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background: #000;
+    }
+
+    .pdf-viewer-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     /* QUIZ UI */
@@ -416,7 +427,7 @@
     <section id="home-view" class="hero">
       <h1 class="hero-title" id="welcome-title">Révisez avec Rigueur et Succès</h1>
       <p class="hero-subtitle" id="welcome-subtitle">
-        Accédez à l'ensemble de vos cours et évaluez vos connaissances grâce à nos séries de QCM interactifs.
+        Accédez à l'ensemble de vos cours au format PDF et évaluez vos connaissances grâce à nos séries de QCM interactifs.
       </p>
 
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
@@ -461,7 +472,7 @@
   </footer>
 
   <script>
-    // URL directe intégrée vers le dépôt distant
+    // URL vers votre dépôt distant
     const DATA_SOURCE_URL = "https://raw.githubusercontent.com/buildorastudio2023/Edu-Lycee/main/";
 
     const AVATARS = ['🚀', '🧠', '🦉', '🎓', '⚡', '🔬', '📚', '💻', '🎨', '🏆'];
@@ -557,7 +568,6 @@
       saveProfile();
     }
 
-    // Chargement dynamique des données distantes
     async function fetchData() {
       const cacheBuster = `?nocache=${Date.now()}`;
       try {
@@ -568,8 +578,7 @@
 
         if (resL && resL.ok) rawLeconsData = await resL.json();
         if (resQ && resQ.ok) rawQuizzData = await resQ.json();
-        
-        // Rafraîchir l'affichage après chargement des données
+
         if (currentTab === 'lecons' || currentTab === 'quizz') renderGrid();
       } catch (err) {
         console.warn("Connexion au serveur de données en cours...");
@@ -632,7 +641,7 @@
             <p>${item.description || (item.questions ? item.questions.length + ' questions' : '')}</p>
           </div>
           <button class="btn" onclick="openDetail('${item.id}')">
-            ${currentTab === 'lecons' ? (isDone ? 'Revoir la leçon' : 'Étudier la leçon') : 'Lancer le quiz'}
+            ${currentTab === 'lecons' ? (isDone ? 'Revoir le cours (PDF)' : 'Consulter le cours (PDF)') : 'Lancer le quiz'}
           </button>
         `;
         grid.appendChild(card);
@@ -658,23 +667,24 @@
 
     function renderLeconDetail(item, container) {
       const isCompleted = userProfile.leconsTerminees.includes(item.id);
-
-      let contentHTML = '';
-      if (item.texte) {
-        if (Array.isArray(item.texte)) {
-          contentHTML = item.texte.map(p => `<p class="lesson-paragraph">${p}</p>`).join('');
-        } else {
-          contentHTML = `<p class="lesson-paragraph">${item.texte}</p>`;
-        }
-      } else if (item.contenu) {
-        contentHTML = item.contenu.map(c => `<p class="lesson-paragraph"><strong>${c.titre || ''}</strong> ${c.texte}</p>`).join('');
-      }
+      
+      // Construction de l'URL du PDF distant
+      const pdfFileName = item.pdf || `${item.id}.pdf`;
+      const pdfUrl = DATA_SOURCE_URL + pdfFileName;
 
       container.innerHTML = `
         <button class="btn btn-secondary" onclick="switchTab('lecons')" style="width: auto; margin-bottom: 2rem;">← Retour aux cours</button>
-        <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
-        <h1 style="font-size: 2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
-        <div style="margin-bottom: 2.5rem;">${contentHTML}</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
+          <a href="${pdfUrl}" target="_blank" class="btn btn-secondary" style="width: auto; padding: 0.4rem 1rem; font-size: 0.85rem;">Télécharger le PDF 📄</a>
+        </div>
+        <h1 style="font-size: 2rem; margin-bottom: 1.5rem;">${item.titre}</h1>
+        
+        <!-- Affichage du PDF via la visionneuse intégrée -->
+        <div class="pdf-viewer-container">
+          <iframe src="https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true"></iframe>
+        </div>
+
         <button id="btn-complete" class="btn" onclick="markLessonComplete('${item.id}')" ${isCompleted ? 'disabled style="background: var(--bg-surface); border:1px solid var(--success); color:var(--success);"' : ''}>
           ${isCompleted ? '✓ Leçon validée (+50 XP)' : 'Marquer comme terminée (+50 XP)'}
         </button>
