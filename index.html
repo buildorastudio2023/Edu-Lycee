@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduLycée</title>
+  <title>EduLycée - Plateforme d'Apprentissage</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +38,10 @@
       margin: 0;
       padding: 0;
       font-family: 'Inter', system-ui, sans-serif;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
     body {
@@ -174,6 +178,10 @@
       border-radius: var(--radius);
       font-size: 0.95rem;
       outline: none;
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
     }
 
     /* GRILLE & CARTES */
@@ -465,6 +473,26 @@
   </footer>
 
   <script>
+    /* DESACTIVATION DU CLIC DROIT, DE LA SELECTION ET DES RACCOURCIS D'INSPECTION */
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener('dragstart', e => e.preventDefault());
+
+    document.addEventListener('keydown', e => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+        (e.ctrlKey && (e.key === 'U' || e.key === 'u'))
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
     const DATA_SOURCE_URL = "https://raw.githubusercontent.com/buildorastudio2023/Edu-Lycee/main/";
 
     const AVATARS = ['🚀', '🧠', '🦉', '🎓', '⚡', '🔬', '📚', '💻', '🎨', '🏆'];
