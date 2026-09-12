@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduLycée - Plateforme d'Apprentissage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>EduLycée</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,6 +42,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -57,22 +58,25 @@
       font-family: 'Outfit', sans-serif;
     }
 
-    /* NAVBAR */
+    /* NAVBAR OPTIMISÉE MOBILE */
     header {
       background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 1rem 2rem;
+      padding: 0.8rem 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     .brand {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 800;
       background: var(--primary-gradient);
       -webkit-background-clip: text;
@@ -83,18 +87,24 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.25rem;
+      overflow-x: auto;
+      max-width: 100%;
+      padding-bottom: 2px;
     }
 
     nav button {
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
-      padding: 0.6rem 1.2rem;
+      padding: 0.5rem 0.8rem;
       font-weight: 600;
+      font-size: 0.85rem;
       border-radius: var(--radius);
       cursor: pointer;
       transition: all 0.25s;
+      white-space: nowrap;
+      min-height: 40px;
     }
 
     nav button:hover {
@@ -108,32 +118,42 @@
       box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
     }
 
+    .header-user-zone {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
     .user-pill {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
-      padding: 0.3rem 0.8rem;
+      padding: 0.3rem 0.7rem;
       border-radius: 30px;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       cursor: pointer;
+      min-height: 36px;
     }
 
     .xp-badge {
       background: rgba(245, 158, 11, 0.15);
       border: 1px solid rgba(245, 158, 11, 0.3);
       color: var(--gold);
-      padding: 0.4rem 0.8rem;
+      padding: 0.3rem 0.7rem;
       border-radius: 30px;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
     }
 
     /* CONTENEUR PRINCIPAL */
     main {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 1.5rem;
+      padding: 1.25rem 1rem;
       width: 100%;
       flex: 1;
     }
@@ -141,43 +161,55 @@
     /* LANDING PAGE / HERO */
     .hero {
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 2rem 0.5rem;
     }
 
     .hero-title {
-      font-size: 3.2rem;
+      font-size: 2.2rem;
       font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
       background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-subtitle {
-      font-size: 1.15rem;
+      font-size: 1rem;
       color: var(--text-muted);
       max-width: 650px;
-      margin: 0 auto 2.5rem auto;
-      line-height: 1.6;
+      margin: 0 auto 2rem auto;
+      line-height: 1.5;
     }
 
-    /* FILTRES */
+    .hero-buttons {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* FILTRES RESPONSIVES */
     .controls {
       display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-direction: column;
     }
 
     select, input[type="text"] {
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 0.85rem 1.25rem;
+      padding: 0.85rem 1rem;
       border-radius: var(--radius);
       font-size: 0.95rem;
       outline: none;
+      width: 100%;
+      min-height: 48px;
       -webkit-user-select: text;
       -moz-user-select: text;
       -ms-user-select: text;
@@ -187,24 +219,25 @@
     /* GRILLE & CARTES */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
 
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.75rem;
+      padding: 1.25rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.3s;
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-3px);
       border-color: rgba(99, 102, 241, 0.4);
     }
 
@@ -220,22 +253,22 @@
     }
 
     .card h3 {
-      font-size: 1.25rem;
-      margin: 1rem 0 0.5rem 0;
+      font-size: 1.15rem;
+      margin: 0.85rem 0 0.4rem 0;
     }
 
     .card p {
       color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
     }
 
     .btn {
       background: var(--primary-gradient);
       color: white;
       border: none;
-      padding: 0.85rem 1.5rem;
+      padding: 0.85rem 1.25rem;
       border-radius: var(--radius);
       font-weight: 700;
       cursor: pointer;
@@ -243,7 +276,11 @@
       transition: opacity 0.2s;
       width: 100%;
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      font-size: 0.95rem;
     }
 
     .btn:hover {
@@ -261,7 +298,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 2.5rem;
+      padding: 1.25rem;
       max-width: 950px;
       margin: 0 auto;
     }
@@ -270,11 +307,12 @@
 
     .pdf-viewer-container {
       width: 100%;
-      height: 700px;
+      height: 60vh;
+      min-height: 380px;
       border-radius: var(--radius);
       border: 1px solid var(--border);
       overflow: hidden;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       background: #000;
     }
 
@@ -288,16 +326,16 @@
     .question-card {
       background: var(--bg-base);
       border: 1px solid var(--border);
-      padding: 1.75rem;
+      padding: 1.25rem;
       border-radius: var(--radius);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .options-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 0.75rem;
-      margin-top: 1.25rem;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-top: 1rem;
     }
 
     .option-btn {
@@ -305,10 +343,12 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 1rem 1.25rem;
+      padding: 0.85rem 1rem;
       border-radius: var(--radius);
       cursor: pointer;
       font-weight: 500;
+      min-height: 48px;
+      font-size: 0.9rem;
     }
 
     .option-btn:hover:not(:disabled) {
@@ -327,7 +367,7 @@
       color: #fca5a5;
     }
 
-    /* MODAL D'ONBOARDING OBLIGATOIRE */
+    /* MODAL D'ONBOARDING OBLIGATOIRE MOBILE */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -336,53 +376,103 @@
       height: 100%;
       background: rgba(11, 15, 25, 0.95);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      padding: 1rem;
     }
 
     .modal-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 2.5rem;
-      width: 90%;
+      padding: 1.5rem;
+      width: 100%;
       max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
 
     .avatar-selector {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 0.75rem;
-      margin: 1.25rem 0;
+      gap: 0.5rem;
+      margin: 1rem 0;
     }
 
     .avatar-opt {
-      font-size: 2rem;
+      font-size: 1.75rem;
       background: var(--bg-base);
       border: 2px solid var(--border);
       border-radius: var(--radius);
-      padding: 0.5rem;
+      padding: 0.4rem;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .avatar-opt.selected {
       border-color: var(--primary);
       background: rgba(99, 102, 241, 0.2);
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 1.5rem 1rem;
       color: var(--text-muted);
       border-top: 1px solid var(--border);
       margin-top: auto;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+    }
+
+    /* MEDIA QUERIES ORDINATEURS & TABLETTES */
+    @media (min-width: 640px) {
+      main {
+        padding: 2rem 1.5rem;
+      }
+      .controls {
+        flex-direction: row;
+      }
+      .controls select {
+        width: auto;
+      }
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+      .hero-buttons {
+        flex-direction: row;
+        max-width: none;
+      }
+      .hero-buttons .btn {
+        width: auto;
+        padding: 1rem 2.5rem;
+      }
+      .hero-title {
+        font-size: 3.2rem;
+      }
+      .hero-subtitle {
+        font-size: 1.15rem;
+      }
+      .view-container {
+        padding: 2.5rem;
+      }
+      .pdf-viewer-container {
+        height: 700px;
+      }
+      .options-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .modal-card {
+        padding: 2.5rem;
+      }
     }
   </style>
 </head>
@@ -391,24 +481,24 @@
   <!-- MODAL ONBOARDING OBLIGATOIRE A LA PREMIERE CONNEXION -->
   <div id="onboarding-modal" class="modal-overlay hidden">
     <div class="modal-card">
-      <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Bienvenue sur EduLycée</h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Configurez votre profil pour personnaliser votre espace d'étude.</p>
+      <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Bienvenue sur EduLycée</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">Configurez votre profil pour personnaliser votre espace d'étude.</p>
       
       <form onsubmit="submitOnboarding(event)">
-        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Votre Surnom</label>
-        <input type="text" id="input-nickname" placeholder="Ex: Alex" required style="width: 100%; margin-bottom: 1.25rem;">
+        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Votre Surnom</label>
+        <input type="text" id="input-nickname" placeholder="Ex: Alex" required style="margin-bottom: 1rem;">
 
-        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Votre Niveau Scolaire</label>
-        <select id="input-niveau" required style="width: 100%; margin-bottom: 1.25rem;">
+        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Votre Niveau Scolaire</label>
+        <select id="input-niveau" required style="margin-bottom: 1rem;">
           <option value="Seconde">Seconde</option>
           <option value="Première">Première</option>
           <option value="Terminale">Terminale</option>
         </select>
 
-        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Choisissez un Avatar (10 choix)</label>
+        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.4rem;">Choisissez un Avatar (10 choix)</label>
         <div class="avatar-selector" id="avatar-grid"></div>
 
-        <button type="submit" class="btn" style="margin-top: 1rem;">Commencer mon apprentissage</button>
+        <button type="submit" class="btn" style="margin-top: 0.5rem;">Commencer mon apprentissage</button>
       </form>
     </div>
   </div>
@@ -421,10 +511,10 @@
       <button id="nav-quizz" onclick="switchTab('quizz')">Quizz</button>
       <button id="nav-profile" onclick="switchTab('profile')">Profil</button>
     </nav>
-    <div style="display: flex; gap: 1rem; align-items: center;">
+    <div class="header-user-zone">
       <div class="user-pill" onclick="switchTab('profile')">
         <span id="nav-avatar">🎓</span>
-        <span id="nav-name" style="font-weight: 600; font-size: 0.9rem;">Élève</span>
+        <span id="nav-name" style="font-weight: 600; font-size: 0.85rem;">Élève</span>
       </div>
       <div class="xp-badge">⚡ <span id="user-xp-display">0 XP</span></div>
     </div>
@@ -438,9 +528,9 @@
         Accédez à l'ensemble de vos cours au format PDF et évaluez vos connaissances grâce à nos séries de QCM interactifs.
       </p>
 
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <button class="btn" onclick="switchTab('lecons')" style="width: auto; padding: 1rem 2.5rem;">Voir mes cours conseillés</button>
-        <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; padding: 1rem 2.5rem;">Passer un quiz</button>
+      <div class="hero-buttons">
+        <button class="btn" onclick="switchTab('lecons')">Voir mes cours conseillés</button>
+        <button class="btn btn-secondary" onclick="switchTab('quizz')">Passer un quiz</button>
       </div>
     </section>
 
@@ -681,7 +771,7 @@
 
       if (filtered.length === 0) {
         grid.innerHTML = `
-          <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">
+          <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem 1rem;">
             Aucun contenu disponible actuellement pour les filtres sélectionnés.
           </div>`;
         return;
@@ -729,12 +819,12 @@
       const pdfUrl = DATA_SOURCE_URL + pdfFileName;
 
       container.innerHTML = `
-        <button class="btn btn-secondary" onclick="switchTab('lecons')" style="width: auto; margin-bottom: 2rem;">← Retour aux cours</button>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <button class="btn btn-secondary" onclick="switchTab('lecons')" style="width: auto; margin-bottom: 1.25rem;">← Retour aux cours</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
           <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
-          <a href="${pdfUrl}" target="_blank" class="btn btn-secondary" style="width: auto; padding: 0.4rem 1rem; font-size: 0.85rem;">Télécharger le PDF 📄</a>
+          <a href="${pdfUrl}" target="_blank" class="btn btn-secondary" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.8rem; min-height: 36px;">Télécharger le PDF 📄</a>
         </div>
-        <h1 style="font-size: 2rem; margin-bottom: 1.5rem;">${item.titre}</h1>
+        <h1 style="font-size: 1.5rem; margin-bottom: 1.25rem;">${item.titre}</h1>
         
         <div class="pdf-viewer-container">
           <iframe src="https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true"></iframe>
@@ -760,15 +850,15 @@
       const questionsToDisplay = item.questions.slice(0, 10);
 
       let html = `
-        <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; margin-bottom: 2rem;">← Retour aux quiz</button>
-        <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
-        <h1 style="font-size: 2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
+        <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; margin-bottom: 1.25rem;">← Retour aux quiz</button>
+        <div><span class="tag-badge">${item.niveau} • ${item.matiere}</span></div>
+        <h1 style="font-size: 1.5rem; margin: 0.8rem 0 1.5rem 0;">${item.titre}</h1>
       `;
 
       questionsToDisplay.forEach((q, qIndex) => {
         html += `
           <div class="question-card" id="q-card-${qIndex}">
-            <p style="font-weight: 700;">Question ${qIndex + 1} : ${q.question}</p>
+            <p style="font-weight: 700; font-size: 0.95rem;">Question ${qIndex + 1} : ${q.question}</p>
             <div class="options-grid">
               ${q.options.slice(0, 4).map((opt, oIndex) => `
                 <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex}, ${q.reponseCorrecte}, '${encodeURIComponent(q.explication)}')">
@@ -776,7 +866,7 @@
                 </button>
               `).join('')}
             </div>
-            <p id="feedback-${qIndex}" style="margin-top: 1rem; font-size: 0.95rem; font-weight: 600;"></p>
+            <p id="feedback-${qIndex}" style="margin-top: 0.85rem; font-size: 0.85rem; font-weight: 600;"></p>
           </div>
         `;
       });
@@ -811,30 +901,30 @@
     function renderProfile() {
       const container = document.getElementById('profile-view');
       container.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-          <div style="font-size: 3.5rem; background: var(--bg-base); border: 1px solid var(--border); padding: 0.5rem; border-radius: var(--radius);">${userProfile.avatar}</div>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="font-size: 2.8rem; background: var(--bg-base); border: 1px solid var(--border); padding: 0.4rem; border-radius: var(--radius); flex-shrink: 0;">${userProfile.avatar}</div>
           <div>
-            <h1 style="font-size: 2rem;">${userProfile.nickname}</h1>
-            <p style="color: var(--text-muted);">Niveau de référence : <strong>${userProfile.niveau}</strong></p>
+            <h1 style="font-size: 1.5rem;">${userProfile.nickname}</h1>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Niveau de référence : <strong>${userProfile.niveau}</strong></p>
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-          <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-            <div style="color: var(--text-muted); font-size: 0.85rem;">Points d'expérience</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: var(--gold);">${userProfile.xp} XP</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-base); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+            <div style="color: var(--text-muted); font-size: 0.75rem;">Points d'expérience</div>
+            <div style="font-size: 1.4rem; font-weight: 800; color: var(--gold);">${userProfile.xp} XP</div>
           </div>
-          <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-            <div style="color: var(--text-muted); font-size: 0.85rem;">Cours Validés</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">${userProfile.leconsTerminees.length}</div>
+          <div style="background: var(--bg-base); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+            <div style="color: var(--text-muted); font-size: 0.75rem;">Cours Validés</div>
+            <div style="font-size: 1.4rem; font-weight: 800; color: var(--accent);">${userProfile.leconsTerminees.length}</div>
           </div>
-          <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-            <div style="color: var(--text-muted); font-size: 0.85rem;">Quiz Réussis</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: var(--success);">${userProfile.scoreQuizzCorrect}</div>
+          <div style="background: var(--bg-base); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+            <div style="color: var(--text-muted); font-size: 0.75rem;">Quiz Réussis</div>
+            <div style="font-size: 1.4rem; font-weight: 800; color: var(--success);">${userProfile.scoreQuizzCorrect}</div>
           </div>
         </div>
 
-        <button class="btn btn-secondary" onclick="resetProfile()" style="border-color: var(--danger); color: var(--danger); width: auto;">Changer de profil / Réinitialiser</button>
+        <button class="btn btn-secondary" onclick="resetProfile()" style="border-color: var(--danger); color: var(--danger);">Changer de profil / Réinitialiser</button>
       `;
     }
 
