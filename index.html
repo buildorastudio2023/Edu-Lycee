@@ -308,7 +308,7 @@
       color: #fca5a5;
     }
 
-    /* MODAL D'ONBOARDING (OBLIGATOIRE A LA 1ÈRE CONNEXION) */
+    /* MODAL D'ONBOARDING OBLIGATOIRE */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -369,7 +369,7 @@
 </head>
 <body>
 
-  <!-- MODAL ONBOARDING OBLIGATOIRE -->
+  <!-- MODAL ONBOARDING OBLIGATOIRE A LA PREMIERE CONNEXION -->
   <div id="onboarding-modal" class="modal-overlay hidden">
     <div class="modal-card">
       <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Bienvenue sur EduLycée</h2>
@@ -461,8 +461,8 @@
   </footer>
 
   <script>
-    // URL directe vers votre base de données distante
-    const DATA_SOURCE_URL = "https://raw.githubusercontent.com/VOTRE_NOM_UTILISATEUR/VOTRE_DEPOT/main/";
+    // URL directe intégrée vers le dépôt distant
+    const DATA_SOURCE_URL = "https://raw.githubusercontent.com/buildorastudio2023/Edu-Lycee/main/";
 
     const AVATARS = ['🚀', '🧠', '🦉', '🎓', '⚡', '🔬', '📚', '💻', '🎨', '🏆'];
     let selectedAvatarIndex = 0;
@@ -487,7 +487,6 @@
       fetchData();
     });
 
-    // Initialisation de la grille d'avatars
     function initAvatars() {
       const grid = document.getElementById('avatar-grid');
       grid.innerHTML = '';
@@ -507,7 +506,6 @@
       });
     }
 
-    // Gestion du profil local
     function loadProfile() {
       const saved = localStorage.getItem('edulycee_profile_v2');
       if (saved) {
@@ -531,11 +529,9 @@
       document.getElementById('nav-name').innerText = userProfile.nickname;
       document.getElementById('user-xp-display').innerText = `${userProfile.xp} XP`;
 
-      // Adaptation dynamique de la page d'accueil selon le niveau choisi
       document.getElementById('welcome-title').innerText = `Révisez le programme de ${userProfile.niveau}`;
       document.getElementById('welcome-subtitle').innerText = `Bonjour ${userProfile.nickname} ! Retrouvez vos cours et quiz spécialement adaptés à votre classe.`;
 
-      // Pré-positionnement automatique du filtre
       document.getElementById('filter-niveau').value = userProfile.niveau;
     }
 
@@ -561,7 +557,7 @@
       saveProfile();
     }
 
-    // Récupération sécurisée et instantanée des données
+    // Chargement dynamique des données distantes
     async function fetchData() {
       const cacheBuster = `?nocache=${Date.now()}`;
       try {
@@ -572,12 +568,14 @@
 
         if (resL && resL.ok) rawLeconsData = await resL.json();
         if (resQ && resQ.ok) rawQuizzData = await resQ.json();
+        
+        // Rafraîchir l'affichage après chargement des données
+        if (currentTab === 'lecons' || currentTab === 'quizz') renderGrid();
       } catch (err) {
-        console.warn("Connexion aux cours en direct en attente.");
+        console.warn("Connexion au serveur de données en cours...");
       }
     }
 
-    // Navigation entre onglets
     function switchTab(tab) {
       currentTab = tab;
 
@@ -600,7 +598,6 @@
       renderGrid();
     }
 
-    // Affichage des cartes de cours ou de quiz
     function renderGrid() {
       const grid = document.getElementById('grid-view');
       grid.innerHTML = '';
@@ -619,7 +616,7 @@
       if (filtered.length === 0) {
         grid.innerHTML = `
           <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">
-            Aucun contenu trouvé pour le niveau <strong>${niveauFilter}</strong>.
+            Aucun contenu disponible actuellement pour le niveau <strong>${niveauFilter}</strong>.
           </div>`;
         return;
       }
@@ -662,7 +659,6 @@
     function renderLeconDetail(item, container) {
       const isCompleted = userProfile.leconsTerminees.includes(item.id);
 
-      // Support des deux formats JSON (paragraphes ou blocs)
       let contentHTML = '';
       if (item.texte) {
         if (Array.isArray(item.texte)) {
@@ -768,7 +764,7 @@
             <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">${userProfile.leconsTerminees.length}</div>
           </div>
           <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-            <div style="color: var(--text-muted); font-size: 0.85rem;">Quiz Reussis</div>
+            <div style="color: var(--text-muted); font-size: 0.85rem;">Quiz Réussis</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: var(--success);">${userProfile.scoreQuizzCorrect}</div>
           </div>
         </div>
