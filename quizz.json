@@ -1,0 +1,16 @@
+[
+  {
+    "id": "quiz-math-2nde-01",
+    "niveau": "Seconde",
+    "matiere": "Mathématiques",
+    "titre": "Quiz : Généralités sur les fonctions",
+    "questions": [
+      {
+        "question": "Quelle est l'image de 3 par la fonction $f(x) = 2x - 1$ ?",
+        "options": ["5", "6", "4", "7"],
+        "reponseCorrecte": 0,
+        "explication": "On calcule $f(3) = 2(3) - 1 = 6 - 1 = 5$."
+      }
+    ]
+  }
+]
