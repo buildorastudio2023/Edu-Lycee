@@ -189,7 +189,118 @@
       flex-direction: column;
       width: 100%;
       max-width: 400px;
-      margin: 0 auto;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    /* STYLES SIMULATEUR BAC 2027 */
+    .simulator-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .simulator-header {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .simulator-header h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-main);
+    }
+
+    .simulator-header p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .sim-card {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+
+    .sim-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .sim-input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+      gap: 0.5rem;
+    }
+
+    .sim-input-group label {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      flex: 1;
+    }
+
+    .sim-input-group input[type="number"] {
+      width: 80px;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      min-height: auto;
+    }
+
+    .sim-input-group input[type="number"]:focus {
+      border-color: var(--primary);
+    }
+
+    .sim-badge-coeff {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: 0.3rem;
+    }
+
+    .sim-result-box {
+      margin-top: 1.5rem;
+      background: var(--primary-gradient);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .sim-result-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0.5rem 0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .sim-result-mention {
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
     }
 
     /* FILTRES RESPONSIVES */
@@ -473,6 +584,9 @@
       .modal-card {
         padding: 2.5rem;
       }
+      .sim-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
@@ -531,6 +645,100 @@
       <div class="hero-buttons">
         <button class="btn" onclick="switchTab('lecons')">Voir mes cours conseillés</button>
         <button class="btn btn-secondary" onclick="switchTab('quizz')">Passer un quiz</button>
+      </div>
+
+      <!-- SECTION SIMULATEUR BAC 2027 -->
+      <div class="simulator-container">
+        <div class="simulator-header">
+          <h2>Simulateur Bac 2027</h2>
+          <p>Calculez votre moyenne pondérée au Baccalauréat Général selon les normes officielles (Coeff. 100)</p>
+        </div>
+
+        <form id="bac-simulator-form" oninput="calculateBacScore()">
+          <div class="sim-grid">
+            <!-- CONTRÔLE CONTINU (40%) -->
+            <div class="sim-card">
+              <h3>Contrôle Continu (40%)</h3>
+              
+              <div class="sim-input-group">
+                <label for="score-ens-scientifique">Enseignement scientifique <span class="sim-badge-coeff">(Coeff. 6)</span></label>
+                <input type="number" id="score-ens-scientifique" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-histoire-geo">Histoire-Géographie <span class="sim-badge-coeff">(Coeff. 6)</span></label>
+                <input type="number" id="score-histoire-geo" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-lva">Langue Vivante A <span class="sim-badge-coeff">(Coeff. 6)</span></label>
+                <input type="number" id="score-lva" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-lvb">Langue Vivante B <span class="sim-badge-coeff">(Coeff. 6)</span></label>
+                <input type="number" id="score-lvb" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-eps">EPS <span class="sim-badge-coeff">(Coeff. 6)</span></label>
+                <input type="number" id="score-eps" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-spe-premiere">Spécialité abandonnée en 1ère <span class="sim-badge-coeff">(Coeff. 8)</span></label>
+                <input type="number" id="score-spe-premiere" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-emc">EMC <span class="sim-badge-coeff">(Coeff. 2)</span></label>
+                <input type="number" id="score-emc" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+            </div>
+
+            <!-- ÉPREUVES FINALES (60%) -->
+            <div class="sim-card">
+              <h3>Épreuves Finales (60%)</h3>
+
+              <div class="sim-input-group">
+                <label for="score-francais-ecrit">Français Écrit (1ère) <span class="sim-badge-coeff">(Coeff. 5)</span></label>
+                <input type="number" id="score-francais-ecrit" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-francais-oral">Français Oral (1ère) <span class="sim-badge-coeff">(Coeff. 5)</span></label>
+                <input type="number" id="score-francais-oral" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-philosophie">Philosophie <span class="sim-badge-coeff">(Coeff. 8)</span></label>
+                <input type="number" id="score-philosophie" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-grand-oral">Grand Oral <span class="sim-badge-coeff">(Coeff. 10)</span></label>
+                <input type="number" id="score-grand-oral" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-spe-terminale-1">Spécialité 1 (Terminale) <span class="sim-badge-coeff">(Coeff. 16)</span></label>
+                <input type="number" id="score-spe-terminale-1" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+
+              <div class="sim-input-group">
+                <label for="score-spe-terminale-2">Spécialité 2 (Terminale) <span class="sim-badge-coeff">(Coeff. 16)</span></label>
+                <input type="number" id="score-spe-terminale-2" min="0" max="20" step="0.25" placeholder="/20">
+              </div>
+            </div>
+          </div>
+
+          <!-- RÉSULTAT DU CALCUL -->
+          <div class="sim-result-box">
+            <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">Moyenne Générale Estimée</p>
+            <div class="sim-result-score" id="bac-final-score">-- / 20</div>
+            <div class="sim-result-mention" id="bac-final-mention">Saisissez vos notes</div>
+          </div>
+        </form>
       </div>
     </section>
 
@@ -607,6 +815,61 @@
       loadProfile();
       fetchData();
     });
+
+    /* CALCULATEUR BAC 2027 */
+    function calculateBacScore() {
+      const subjects = [
+        { id: 'score-ens-scientifique', coeff: 6 },
+        { id: 'score-histoire-geo', coeff: 6 },
+        { id: 'score-lva', coeff: 6 },
+        { id: 'score-lvb', coeff: 6 },
+        { id: 'score-eps', coeff: 6 },
+        { id: 'score-spe-premiere', coeff: 8 },
+        { id: 'score-emc', coeff: 2 },
+        { id: 'score-francais-ecrit', coeff: 5 },
+        { id: 'score-francais-oral', coeff: 5 },
+        { id: 'score-philosophie', coeff: 8 },
+        { id: 'score-grand-oral', coeff: 10 },
+        { id: 'score-spe-terminale-1', coeff: 16 },
+        { id: 'score-spe-terminale-2', coeff: 16 }
+      ];
+
+      let totalPoints = 0;
+      let totalCoeffs = 0;
+
+      subjects.forEach(sub => {
+        const input = document.getElementById(sub.id);
+        const val = parseFloat(input.value);
+        if (!isNaN(val) && val >= 0 && val <= 20) {
+          totalPoints += val * sub.coeff;
+          totalCoeffs += sub.coeff;
+        }
+      });
+
+      const scoreDisplay = document.getElementById('bac-final-score');
+      const mentionDisplay = document.getElementById('bac-final-mention');
+
+      if (totalCoeffs === 0) {
+        scoreDisplay.innerText = "-- / 20";
+        mentionDisplay.innerText = "Saisissez vos notes";
+        return;
+      }
+
+      const average = totalPoints / totalCoeffs;
+      scoreDisplay.innerText = `${average.toFixed(2)} / 20`;
+
+      if (average < 10) {
+        mentionDisplay.innerText = "Insuffisant";
+      } else if (average < 12) {
+        mentionDisplay.innerText = "Admis (Sans mention)";
+      } else if (average < 14) {
+        mentionDisplay.innerText = "Mention Assez Bien";
+      } else if (average < 16) {
+        mentionDisplay.innerText = "Mention Bien";
+      } else {
+        mentionDisplay.innerText = "Mention Très Bien";
+      }
+    }
 
     function initAvatars() {
       const grid = document.getElementById('avatar-grid');
