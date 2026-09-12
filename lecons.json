@@ -1,14 +1,13 @@
 [
   {
-    "id": "math-2nde-fonctions",
+    "id": "math-2nde-01",
     "niveau": "Seconde",
     "matiere": "Mathématiques",
     "titre": "Généralités sur les fonctions",
-    "description": "Comprendre les notions d'image, d'antécédent et de courbes représentatives.",
+    "description": "Introduction aux notions d'image, antécédent et représentations graphiques.",
     "texte": [
-      "Une fonction $f$ associe à tout nombre réel $x$ d'un ensemble de définition $D$ un unique nombre réel noté $f(x)$.",
-      "Pour calculer l'image d'un nombre par une fonction, il suffit de remplacer $x$ par la valeur donnée dans l'expression algébrique.",
-      "Exemple : Si $f(x) = 2x + 3$, l'image de $2$ est $f(2) = 2(2) + 3 = 7$."
+      "Une fonction $f$ associe à tout nombre réel $x$ un unique nombre réel noté $f(x)$.",
+      "Pour calculer l'image de 2 par $f(x) = 2x + 3$, on effectue $f(2) = 2(2) + 3 = 7$."
     ]
   }
 ]
