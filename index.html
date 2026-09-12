@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduLycée - Plateforme d'Apprentissage</title>
+  <title>EduLycée</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -438,7 +438,7 @@
 
     <!-- BARRE DE FILTRES -->
     <div class="controls hidden" id="controls-bar">
-      <select id="filter-niveau" onchange="filterData()">
+      <select id="filter-niveau" onchange="updateMatiereOptions(); filterData();">
         <option value="ALL">Tous les niveaux</option>
         <option value="Seconde">Seconde</option>
         <option value="Première">Première</option>
@@ -446,14 +446,7 @@
       </select>
 
       <select id="filter-matiere" onchange="filterData()">
-        <option value="ALL">Toutes les matières</option>
-        <option value="Mathématiques">Mathématiques</option>
-        <option value="Physique-Chimie">Physique-Chimie</option>
-        <option value="SVT">SVT</option>
-        <option value="Français">Français</option>
-        <option value="Philosophie">Philosophie</option>
-        <option value="Histoire-Géographie">Histoire-Géographie</option>
-        <option value="NSI">NSI</option>
+        <!-- Généré dynamiquement par JavaScript -->
       </select>
     </div>
 
@@ -472,7 +465,6 @@
   </footer>
 
   <script>
-    // URL vers votre dépôt distant
     const DATA_SOURCE_URL = "https://raw.githubusercontent.com/buildorastudio2023/Edu-Lycee/main/";
 
     const AVATARS = ['🚀', '🧠', '🦉', '🎓', '⚡', '🔬', '📚', '💻', '🎨', '🏆'];
@@ -544,6 +536,40 @@
       document.getElementById('welcome-subtitle').innerText = `Bonjour ${userProfile.nickname} ! Retrouvez vos cours et quiz spécialement adaptés à votre classe.`;
 
       document.getElementById('filter-niveau').value = userProfile.niveau;
+      updateMatiereOptions();
+    }
+
+    /* Mise à jour dynamique des matières selon le niveau scolaire */
+    function updateMatiereOptions() {
+      const niveau = document.getElementById('filter-niveau').value;
+      const selectMatiere = document.getElementById('filter-matiere');
+      const currentSelected = selectMatiere.value;
+
+      let options = ['<option value="ALL">Toutes les matières</option>'];
+
+      options.push('<option value="Mathématiques">Mathématiques</option>');
+      options.push('<option value="Physique-Chimie">Physique-Chimie</option>');
+      options.push('<option value="SVT">SVT</option>');
+      options.push('<option value="Histoire-Géographie">Histoire-Géographie</option>');
+      options.push('<option value="NSI">NSI</option>');
+
+      // Français uniquement pour Seconde, Première ou Tous les niveaux
+      if (niveau === 'ALL' || niveau === 'Seconde' || niveau === 'Première') {
+        options.push('<option value="Français">Français</option>');
+      }
+
+      // Philosophie uniquement pour Terminale ou Tous les niveaux
+      if (niveau === 'ALL' || niveau === 'Terminale') {
+        options.push('<option value="Philosophie">Philosophie</option>');
+      }
+
+      selectMatiere.innerHTML = options.join('');
+
+      if ([...selectMatiere.options].some(o => o.value === currentSelected)) {
+        selectMatiere.value = currentSelected;
+      } else {
+        selectMatiere.value = 'ALL';
+      }
     }
 
     function submitOnboarding(e) {
@@ -599,7 +625,10 @@
       document.getElementById('detail-view').classList.add('hidden');
       document.getElementById('profile-view').classList.toggle('hidden', tab !== 'profile');
 
-      if (tab === 'lecons' || tab === 'quizz') renderGrid();
+      if (tab === 'lecons' || tab === 'quizz') {
+        updateMatiereOptions();
+        renderGrid();
+      }
       if (tab === 'profile') renderProfile();
     }
 
@@ -625,7 +654,7 @@
       if (filtered.length === 0) {
         grid.innerHTML = `
           <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">
-            Aucun contenu disponible actuellement pour le niveau <strong>${niveauFilter}</strong>.
+            Aucun contenu disponible actuellement pour les filtres sélectionnés.
           </div>`;
         return;
       }
@@ -668,7 +697,6 @@
     function renderLeconDetail(item, container) {
       const isCompleted = userProfile.leconsTerminees.includes(item.id);
       
-      // Construction de l'URL du PDF distant
       const pdfFileName = item.pdf || `${item.id}.pdf`;
       const pdfUrl = DATA_SOURCE_URL + pdfFileName;
 
@@ -680,7 +708,6 @@
         </div>
         <h1 style="font-size: 2rem; margin-bottom: 1.5rem;">${item.titre}</h1>
         
-        <!-- Affichage du PDF via la visionneuse intégrée -->
         <div class="pdf-viewer-container">
           <iframe src="https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true"></iframe>
         </div>
