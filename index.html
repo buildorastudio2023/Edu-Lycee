@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduLycee - Académie Numérique du Lycée</title>
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Support LaTeX via MathJax -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      --accent: #06b6d4;
+      --bg-base: #0b0f19;
+      --bg-surface: #151c2c;
+      --bg-card: rgba(21, 28, 44, 0.75);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --danger: #ef4444;
+      --gold: #f59e0b;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* ==================== NAVBAR ==================== */
+    header {
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    nav button {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    nav button:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    nav button.active {
+      color: #fff;
+      background: var(--primary-gradient);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Badge XP Navbar */
+    .xp-badge {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--gold);
+      padding: 0.4rem 0.8rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ==================== MAIN CONTAINER ==================== */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* ==================== LANDING PAGE / HERO ==================== */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 5rem 1rem;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 2.5rem auto;
+      line-height: 1.6;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      min-width: 160px;
+    }
+
+    .stat-pill .value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-pill .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ==================== FILTRES & CONTROLES ==================== */
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    select {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* ==================== GRILLE & CARTES ==================== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(12px);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+
+    .tag-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      width: fit-content;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: opacity 0.2s;
+      width: 100%;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+
+    /* ==================== DETAIL VUE (LECON & QUIZ) ==================== */
+    .view-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .hidden { display: none !important; }
+
+    .lesson-paragraph {
+      line-height: 1.8;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* QCM UI */
+    .question-card {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .option-btn {
+      text-align: left;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: var(--success) !important;
+      color: #6ee7b7;
+    }
+
+    .option-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: var(--danger) !important;
+      color: #fca5a5;
+    }
+
+    /* Profil & Système de Points */
+    .level-bar-container {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      height: 16px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .level-bar-fill {
+      background: var(--primary-gradient);
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand" onclick="switchTab('home')">EduLycée</div>
+    <nav>
+      <button id="nav-home" class="active" onclick="switchTab('home')">Accueil</button>
+      <button id="nav-lecons" onclick="switchTab('lecons')">Leçons</button>
+      <button id="nav-quizz" onclick="switchTab('quizz')">Quizz</button>
+      <button id="nav-profile" onclick="switchTab('profile')">Profil</button>
+    </nav>
+    <div class="xp-badge">
+      ⚡ <span id="user-xp-display">0 XP</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- PAGE D'ACCUEIL (LANDING PAGE) -->
+    <section id="home-view" class="hero">
+      <h1 class="hero-title">Révisez le Lycée avec<br>Excellence et Rigueur</h1>
+      <p class="hero-subtitle">
+        Accédez instantanément à tous vos cours de Seconde, Première et Terminale. Entraînez-vous avec des quiz interactifs et gagnez de l'expérience au quotidien.
+      </p>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn" onclick="switchTab('lecons')" style="width: auto; padding: 1rem 2.5rem; font-size: 1.1rem;">Explorer les cours</button>
+        <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; padding: 1rem 2.5rem; font-size: 1.1rem;">Tester mes connaissances</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-pill">
+          <div class="value">3 Niveaux</div>
+          <div class="label">2nde, 1re, Terminale</div>
+        </div>
+        <div class="stat-pill">
+          <div class="value">10 Max</div>
+          <div class="label">Questions par Quiz</div>
+        </div>
+        <div class="stat-pill">
+          <div class="value">100% Direct</div>
+          <div class="label">Données GitHub en temps réel</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BARRE DE FILTRES -->
+    <div class="controls hidden" id="controls-bar">
+      <select id="filter-niveau" onchange="filterData()">
+        <option value="ALL">Tous les niveaux</option>
+        <option value="Seconde">Seconde</option>
+        <option value="Première">Première</option>
+        <option value="Terminale">Terminale</option>
+      </select>
+
+      <select id="filter-matiere" onchange="filterData()">
+        <option value="ALL">Toutes les matières</option>
+        <option value="Mathématiques">Mathématiques</option>
+        <option value="Physique-Chimie">Physique-Chimie</option>
+        <option value="SVT">SVT</option>
+        <option value="Français">Français</option>
+        <option value="Philosophie">Philosophie</option>
+        <option value="Histoire-Géographie">Histoire-Géographie</option>
+        <option value="NSI">NSI</option>
+      </select>
+    </div>
+
+    <!-- GRILLE PRINCIPALE (COURS & QUIZ) -->
+    <div id="grid-view" class="grid hidden"></div>
+
+    <!-- VUE DÉTAILLÉE -->
+    <div id="detail-view" class="view-container hidden"></div>
+
+    <!-- PROFIL & GAMIFICATION -->
+    <div id="profile-view" class="view-container hidden"></div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 EduLycée — Plateforme d'apprentissage dynamique synchronisée avec GitHub</p>
+  </footer>
+
+  <script>
+    // Configuration GitHub (À modifier avec vos identifiants)
+    const GITHUB_CONFIG = {
+      username: "VOTRE_NOM_UTILISATEUR",
+      repository: "VOTRE_DEPOT",
+      branch: "main"
+    };
+
+    const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/${GITHUB_CONFIG.branch}/`;
+
+    let currentTab = 'home';
+    let rawLeconsData = [];
+    let rawQuizzData = [];
+
+    // Profil local
+    let userProfile = {
+      xp: 0,
+      leconsTerminees: [],
+      scoreQuizzCorrect: 0
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProfile();
+      loadGitHubData();
+    });
+
+    function loadProfile() {
+      const saved = localStorage.getItem('edulycee_user_data');
+      if (saved) {
+        userProfile = JSON.parse(saved);
+      }
+      updateXPDisplay();
+    }
+
+    function saveProfile() {
+      localStorage.setItem('edulycee_user_data', JSON.stringify(userProfile));
+      updateXPDisplay();
+    }
+
+    function updateXPDisplay() {
+      document.getElementById('user-xp-display').innerText = `${userProfile.xp} XP`;
+    }
+
+    function addXP(amount) {
+      userProfile.xp += amount;
+      saveProfile();
+    }
+
+    // Récupération sans cache
+    async function loadGitHubData() {
+      const noCacheQuery = `?nocache=${Date.now()}`;
+      try {
+        const [resLecons, resQuizz] = await Promise.all([
+          fetch(BASE_URL + 'lecons.json' + noCacheQuery),
+          fetch(BASE_URL + 'quizz.json' + noCacheQuery)
+        ]);
+
+        if (resLecons.ok) rawLeconsData = await resLecons.json();
+        if (resQuizz.ok) rawQuizzData = await resQuizz.json();
+      } catch (err) {
+        console.warn("Données distantes non disponibles pour le moment.");
+      }
+    }
+
+    // Gestion de la navigation
+    function switchTab(tab) {
+      currentTab = tab;
+
+      ['home', 'lecons', 'quizz', 'profile'].forEach(t => {
+        const btn = document.getElementById(`nav-${t}`);
+        if (btn) btn.classList.toggle('active', t === tab);
+      });
+
+      document.getElementById('home-view').classList.toggle('hidden', tab !== 'home');
+      document.getElementById('controls-bar').classList.toggle('hidden', tab !== 'lecons' && tab !== 'quizz');
+      document.getElementById('grid-view').classList.toggle('hidden', tab !== 'lecons' && tab !== 'quizz');
+      document.getElementById('detail-view').classList.add('hidden');
+      document.getElementById('profile-view').classList.toggle('hidden', tab !== 'profile');
+
+      if (tab === 'lecons' || tab === 'quizz') renderGrid();
+      if (tab === 'profile') renderProfile();
+    }
+
+    function filterData() {
+      renderGrid();
+    }
+
+    // Rendu de la grille des leçons ou quiz
+    function renderGrid() {
+      const grid = document.getElementById('grid-view');
+      grid.innerHTML = '';
+
+      const niveauFilter = document.getElementById('filter-niveau').value;
+      const matiereFilter = document.getElementById('filter-matiere').value;
+
+      const dataset = (currentTab === 'lecons') ? rawLeconsData : rawQuizzData;
+
+      const filtered = dataset.filter(item => {
+        const matchNiveau = (niveauFilter === 'ALL' || item.niveau === niveauFilter);
+        const matchMatiere = (matiereFilter === 'ALL' || item.matiere === matiereFilter);
+        return matchNiveau && matchMatiere;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">Aucun élément disponible dans la base GitHub pour ces filtres.</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const isDone = userProfile.leconsTerminees.includes(item.id);
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div>
+            <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
+            <h3>${item.titre}</h3>
+            <p>${item.description || (item.questions ? item.questions.length + ' questions' : '')}</p>
+          </div>
+          <button class="btn" onclick="openDetail('${item.id}')">
+            ${currentTab === 'lecons' ? (isDone ? 'Revoir la leçon' : 'Étudier la leçon') : 'Démarrer le quiz'}
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Ouverture détaillée
+    function openDetail(id) {
+      document.getElementById('controls-bar').classList.add('hidden');
+      document.getElementById('grid-view').classList.add('hidden');
+      const detailView = document.getElementById('detail-view');
+      detailView.classList.remove('hidden');
+
+      if (currentTab === 'lecons') {
+        const item = rawLeconsData.find(l => l.id === id);
+        renderLeconDetail(item, detailView);
+      } else {
+        const item = rawQuizzData.find(q => q.id === id);
+        renderQuizDetail(item, detailView);
+      }
+
+      if (window.MathJax) MathJax.typesetPromise();
+    }
+
+    // Affichage des leçons
+    function renderLeconDetail(item, container) {
+      const isCompleted = userProfile.leconsTerminees.includes(item.id);
+
+      let textContent = '';
+      if (Array.isArray(item.texte)) {
+        textContent = item.texte.map(p => `<p class="lesson-paragraph">${p}</p>`).join('');
+      } else {
+        textContent = `<p class="lesson-paragraph">${item.texte}</p>`;
+      }
+
+      container.innerHTML = `
+        <button class="btn btn-secondary" onclick="switchTab('lecons')" style="width: auto; margin-bottom: 2rem;">← Retour aux cours</button>
+        <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
+        <h1 style="font-size: 2.2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
+        <div style="margin-bottom: 2.5rem;">${textContent}</div>
+        <button id="btn-complete" class="btn" onclick="markLessonComplete('${item.id}')" ${isCompleted ? 'disabled style="background: var(--bg-surface); border:1px solid var(--success); color:var(--success);"' : ''}>
+          ${isCompleted ? '✓ Leçon validée (+50 XP)' : 'Marquer comme terminée (+50 XP)'}
+        </button>
+      `;
+    }
+
+    function markLessonComplete(id) {
+      if (!userProfile.leconsTerminees.includes(id)) {
+        userProfile.leconsTerminees.push(id);
+        addXP(50);
+        const btn = document.getElementById('btn-complete');
+        btn.innerText = '✓ Leçon validée (+50 XP)';
+        btn.disabled = true;
+      }
+    }
+
+    // Affichage des quiz (Max 10 questions, 4 choix)
+    function renderQuizDetail(item, container) {
+      const questionsToDisplay = item.questions.slice(0, 10);
+
+      let html = `
+        <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; margin-bottom: 2rem;">← Retour aux quiz</button>
+        <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
+        <h1 style="font-size: 2.2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
+      `;
+
+      questionsToDisplay.forEach((q, qIndex) => {
+        html += `
+          <div class="question-card" id="q-card-${qIndex}">
+            <p style="font-weight: 700; font-size: 1.1rem;">Question ${qIndex + 1} : ${q.question}</p>
+            <div class="options-grid">
+              ${q.options.slice(0, 4).map((opt, oIndex) => `
+                <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex}, ${q.reponseCorrecte}, '${encodeURIComponent(q.explication)}')">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+            <p id="feedback-${qIndex}" style="margin-top: 1rem; font-size: 0.95rem; font-weight: 600;"></p>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function checkAnswer(qIndex, selectedIndex, correctIndex, encodedExplication) {
+      const explication = decodeURIComponent(encodedExplication);
+      const card = document.getElementById(`q-card-${qIndex}`);
+      const buttons = card.querySelectorAll('.option-btn');
+      const feedback = document.getElementById(`feedback-${qIndex}`);
+
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) btn.classList.add('correct');
+        else if (idx === selectedIndex) btn.classList.add('wrong');
+      });
+
+      if (selectedIndex === correctIndex) {
+        feedback.style.color = 'var(--success)';
+        feedback.innerText = '✔ Correct ! ' + explication;
+        addXP(25);
+        userProfile.scoreQuizzCorrect += 1;
+        saveProfile();
+      } else {
+        feedback.style.color = 'var(--danger)';
+        feedback.innerText = '✘ Incorrect. ' + explication;
+      }
+    }
+
+    // Affichage du Profil et Système de Niveaux
+    function renderProfile() {
+      const currentLevel = Math.floor(userProfile.xp / 100) + 1;
+      const progressInLevel = userProfile.xp % 100;
+
+      const container = document.getElementById('profile-view');
+      container.innerHTML = `
+        <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Votre Progression</h1>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Suivez votre rang et vos statistiques d'apprentissage.</p>
+
+        <div style="background: var(--bg-base); border: 1px solid var(--border); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
+          <div style="display: flex; justify-content: space-between; font-weight: 700;">
+            <span>Niveau ${currentLevel}</span>
+            <span>${progressInLevel} / 100 XP</span>
+          </div>
+          <div class="level-bar-container">
+            <div class="level-bar-fill" style="width: ${progressInLevel}%;"></div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+          <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+            <div style="color: var(--text-muted); font-size: 0.85rem;">XP Totale</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--gold); margin-top: 0.25rem;">${userProfile.xp}</div>
+          </div>
+          <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+            <div style="color: var(--text-muted); font-size: 0.85rem;">Cours Terminés</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-top: 0.25rem;">${userProfile.leconsTerminees.length}</div>
+          </div>
+          <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
+            <div style="color: var(--text-muted); font-size: 0.85rem;">Réponses Correctes</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--success); margin-top: 0.25rem;">${userProfile.scoreQuizzCorrect}</div>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="resetData()" style="border-color: var(--danger); color: var(--danger); width: auto;">Réinitialiser ma progression</button>
+      `;
+    }
+
+    function resetData() {
+      if (confirm("Voulez-vous réinitialiser l'intégralité de vos points XP et leçons validées ?")) {
+        userProfile = { xp: 0, leconsTerminees: [], scoreQuizzCorrect: 0 };
+        saveProfile();
+        renderProfile();
+      }
+    }
+  </script>
+</body>
+</html>
