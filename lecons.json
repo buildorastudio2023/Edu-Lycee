@@ -4,10 +4,61 @@
     "niveau": "Seconde",
     "matiere": "Mathématiques",
     "titre": "Généralités sur les fonctions",
-    "description": "Introduction aux notions d'image, antécédent et représentations graphiques.",
+    "description": "Découvrir les fonctions et comprendre simplement les notions d'image, d'antécédent, de représentation graphique, de variations et de signe.",
+    "images": [
+      {
+        "src": "images/fonction-machine.svg",
+        "alt": "Schéma représentant une fonction comme une machine qui transforme x en f(x)",
+        "description": "Une fonction peut être vue comme une machine : on entre un nombre x et la fonction donne un résultat f(x)."
+      },
+      {
+        "src": "images/image-antecedent.svg",
+        "alt": "Schéma montrant la différence entre image et antécédent",
+        "description": "Schéma montrant qu'un nombre de départ est l'antécédent et que le résultat obtenu est l'image."
+      },
+      {
+        "src": "images/courbe-fonction.svg",
+        "alt": "Courbe représentative d'une fonction dans un repère",
+        "description": "Une fonction peut être représentée graphiquement par une courbe dans un repère."
+      },
+      {
+        "src": "images/variations-fonction.svg",
+        "alt": "Schéma montrant une fonction croissante et une fonction décroissante",
+        "description": "Une fonction peut monter lorsqu'elle est croissante ou descendre lorsqu'elle est décroissante."
+      }
+    ],
     "texte": [
-      "Une fonction $f$ associe à tout nombre réel $x$ un unique nombre réel noté $f(x)$.",
-      "Pour calculer l'image de 2 par $f(x) = 2x + 3$, on effectue $f(2) = 2(2) + 3 = 7$."
+      "## 1. Qu'est-ce qu'une fonction ?\n\nUne fonction est une règle qui associe à chaque nombre x une seule valeur, appelée f(x).\n\nOn peut imaginer une fonction comme une machine : on entre un nombre, la machine applique une règle et elle donne un résultat.\n\nExemple :\n\nf(x) = 2x + 3\n\nSi on entre 4 dans la fonction :\n\nf(4) = 2 × 4 + 3 = 11\n\nLa fonction associe donc 4 à 11.",
+      
+      "## 2. Le vocabulaire important\n\nDans une fonction, il faut connaître trois mots essentiels :\n\n- x est le nombre de départ.\n- f(x) est l'image de x.\n- x est un antécédent de f(x).\n\nExemple :\n\nSi f(4) = 11, alors :\n\n- 11 est l'image de 4.\n- 4 est un antécédent de 11.\n\nAttention : une image est toujours unique pour un même antécédent, mais une image peut avoir plusieurs antécédents.",
+      
+      "## 3. Calculer une image\n\nPour calculer l'image d'un nombre, il suffit de remplacer x par ce nombre dans l'expression de la fonction.\n\nExemple :\n\nf(x) = 3x - 2\n\nOn cherche l'image de 5.\n\nf(5) = 3 × 5 - 2\nf(5) = 15 - 2\nf(5) = 13\n\nDonc l'image de 5 par f est 13.\n\nMéthode :\n1. Écrire la fonction.\n2. Remplacer x par la valeur demandée.\n3. Effectuer le calcul.\n4. Donner le résultat.",
+      
+      "## 4. Trouver un antécédent\n\nPour trouver un antécédent, on cherche le nombre x qui donne l'image demandée.\n\nOn doit donc résoudre une équation.\n\nExemple :\n\nf(x) = 2x + 3\n\nOn cherche l'antécédent de 11.\n\nOn cherche donc x tel que :\n\n2x + 3 = 11\n\n2x = 8\n\nx = 4\n\nDonc 4 est un antécédent de 11.",
+      
+      "## 5. Une image peut avoir plusieurs antécédents\n\nUne même image peut parfois être obtenue avec plusieurs nombres différents.\n\nExemple :\n\nf(x) = x²\n\nOn cherche les antécédents de 9.\n\nx² = 9\n\nLes solutions sont :\n\nx = -3 ou x = 3\n\nDonc 9 possède deux antécédents : -3 et 3.\n\nEn revanche, un même nombre x ne peut pas avoir deux images différentes dans une fonction.",
+      
+      "## 6. Représenter une fonction dans un tableau\n\nOn peut calculer plusieurs images et les placer dans un tableau de valeurs.\n\nExemple :\n\nf(x) = 2x + 1\n\nPour x = -2 : f(-2) = -3\nPour x = -1 : f(-1) = -1\nPour x = 0 : f(0) = 1\nPour x = 1 : f(1) = 3\nPour x = 2 : f(2) = 5\n\nOn obtient :\n\nx      | -2 | -1 | 0 | 1 | 2\nf(x)   | -3 | -1 | 1 | 3 | 5\n\nCe tableau permet ensuite de placer les points dans un repère.",
+      
+      "## 7. Représentation graphique d'une fonction\n\nUne fonction peut être représentée par une courbe dans un repère.\n\nChaque point de la courbe possède des coordonnées de la forme :\n\n(x ; f(x))\n\nPar exemple, si f(2) = 5, alors le point A(2 ; 5) appartient à la courbe de f.\n\nPour construire une courbe, on peut calculer plusieurs valeurs de f(x), placer les points correspondants puis les relier de manière adaptée.",
+      
+      "## 8. Lire une image sur un graphique\n\nPour lire l'image d'un nombre sur une courbe, on part de la valeur x sur l'axe horizontal.\n\nEnsuite :\n\n1. On monte verticalement jusqu'à la courbe.\n2. On se déplace horizontalement vers l'axe vertical.\n3. On lit la valeur de f(x).\n\nExemple : si on lit que la courbe passe par le point (3 ; 7), alors :\n\nf(3) = 7\n\nL'image de 3 est donc 7.",
+      
+      "## 9. Lire un antécédent sur un graphique\n\nPour trouver un antécédent, on fait le raisonnement inverse.\n\nSi on cherche les antécédents de 4 :\n\n1. On part de 4 sur l'axe vertical.\n2. On se déplace horizontalement jusqu'à la courbe.\n3. On redescend verticalement vers l'axe horizontal.\n4. On lit la ou les valeurs de x.\n\nIl peut y avoir un seul antécédent, plusieurs antécédents ou aucun antécédent.",
+      
+      "## 10. Les variations d'une fonction\n\nLes variations permettent de savoir comment évolue une fonction lorsque x augmente.\n\nUne fonction est croissante lorsqu'elle augmente lorsque x augmente.\n\nSur une représentation graphique, une fonction croissante correspond généralement à une courbe qui monte de gauche à droite.\n\nUne fonction est décroissante lorsqu'elle diminue lorsque x augmente.\n\nSur une représentation graphique, une fonction décroissante correspond généralement à une courbe qui descend de gauche à droite.",
+      
+      "## 11. Maximum et minimum\n\nUne fonction peut atteindre une valeur particulièrement grande ou particulièrement petite.\n\nLa plus grande valeur atteinte par une fonction sur un intervalle est appelée un maximum.\n\nLa plus petite valeur atteinte est appelée un minimum.\n\nExemple :\n\nSi une courbe atteint sa plus grande hauteur à x = 3 et que cette hauteur vaut 8, alors la fonction possède un maximum égal à 8 atteint pour x = 3.",
+      
+      "## 12. Le signe d'une fonction\n\nÉtudier le signe d'une fonction consiste à déterminer où elle est positive, nulle ou négative.\n\nOn distingue trois situations :\n\n- f(x) > 0 : la fonction est positive.\n- f(x) = 0 : la fonction est nulle.\n- f(x) < 0 : la fonction est négative.\n\nSur un graphique :\n\n- Si la courbe est au-dessus de l'axe des abscisses, f(x) est positive.\n- Si la courbe est sur l'axe des abscisses, f(x) est nulle.\n- Si la courbe est en dessous de l'axe des abscisses, f(x) est négative.",
+      
+      "## 13. Les zéros d'une fonction\n\nLes zéros d'une fonction sont les valeurs de x pour lesquelles :\n\nf(x) = 0\n\nGraphiquement, ce sont les abscisses des points où la courbe rencontre l'axe des abscisses.\n\nExemple :\n\nf(x) = x - 5\n\nPour trouver le zéro :\n\nx - 5 = 0\n\nx = 5\n\nLe zéro de la fonction est donc 5.",
+      
+      "## 14. Ensemble de définition\n\nL'ensemble de définition correspond à toutes les valeurs de x que l'on a le droit d'utiliser dans la fonction.\n\nPar exemple, dans la fonction :\n\nf(x) = 1/x\n\non ne peut pas utiliser x = 0 car une division par zéro est impossible.\n\nDans ce cas, tous les nombres sont autorisés sauf 0.\n\nPour une fonction contenant une racine carrée, il faut également respecter certaines conditions.\n\nPar exemple :\n\nf(x) = √x\n\nIl faut que x soit supérieur ou égal à 0.",
+      
+      "## 15. Exemple complet\n\nOn considère la fonction :\n\nf(x) = x² - 1\n\n### Calcul de l'image de 3\n\nf(3) = 3² - 1\nf(3) = 9 - 1\nf(3) = 8\n\nL'image de 3 est 8.\n\n### Recherche des antécédents de 8\n\nOn cherche x tel que :\n\nx² - 1 = 8\n\nx² = 9\n\nx = -3 ou x = 3\n\nLes antécédents de 8 sont donc -3 et 3.\n\n### Recherche des zéros\n\nOn cherche x tel que :\n\nx² - 1 = 0\n\nx² = 1\n\nx = -1 ou x = 1\n\nLes zéros de la fonction sont donc -1 et 1.",
+      
+      "## 16. L'essentiel à retenir\n\nUne fonction associe à chaque nombre x une seule image f(x).\n\nImage : résultat obtenu lorsqu'on connaît x.\n\nAntécédent : nombre qui permet d'obtenir une image donnée.\n\nPour calculer une image : on remplace x par la valeur donnée.\n\nPour trouver un antécédent : on résout une équation.\n\nSur un graphique :\n- l'axe horizontal correspond aux valeurs de x ;\n- l'axe vertical correspond aux valeurs de f(x).\n\nFonction croissante : la courbe monte.\n\nFonction décroissante : la courbe descend.\n\nFonction positive : la courbe est au-dessus de l'axe des abscisses.\n\nFonction négative : la courbe est en dessous de l'axe des abscisses.\n\nZéro d'une fonction : valeur de x pour laquelle f(x) = 0."
     ]
   }
 ]
