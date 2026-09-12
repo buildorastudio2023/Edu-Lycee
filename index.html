@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduLycee - Académie Numérique du Lycée</title>
+  <title>EduLycée - Plateforme d'Apprentissage</title>
 
-  <!-- Google Fonts: Inter & Outfit -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Support LaTeX via MathJax -->
+  <!-- MathJax pour le rendu LaTeX -->
   <script>
     window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
   </script>
@@ -23,7 +23,7 @@
       --accent: #06b6d4;
       --bg-base: #0b0f19;
       --bg-surface: #151c2c;
-      --bg-card: rgba(21, 28, 44, 0.75);
+      --bg-card: rgba(21, 28, 44, 0.8);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -53,7 +53,7 @@
       font-family: 'Outfit', sans-serif;
     }
 
-    /* ==================== NAVBAR ==================== */
+    /* NAVBAR */
     header {
       background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(16px);
@@ -79,7 +79,7 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
     nav button {
@@ -104,7 +104,17 @@
       box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
     }
 
-    /* Badge XP Navbar */
+    .user-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
     .xp-badge {
       background: rgba(245, 158, 11, 0.15);
       border: 1px solid rgba(245, 158, 11, 0.3);
@@ -113,12 +123,9 @@
       border-radius: 30px;
       font-weight: 700;
       font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
     }
 
-    /* ==================== MAIN CONTAINER ==================== */
+    /* CONTENEUR PRINCIPAL */
     main {
       max-width: 1200px;
       margin: 0 auto;
@@ -127,15 +134,14 @@
       flex: 1;
     }
 
-    /* ==================== LANDING PAGE / HERO ==================== */
+    /* LANDING PAGE / HERO */
     .hero {
       text-align: center;
-      padding: 4rem 1rem 5rem 1rem;
-      position: relative;
+      padding: 3rem 1rem;
     }
 
     .hero-title {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       font-weight: 800;
       line-height: 1.15;
       margin-bottom: 1.5rem;
@@ -145,42 +151,14 @@
     }
 
     .hero-subtitle {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
       max-width: 650px;
       margin: 0 auto 2.5rem auto;
       line-height: 1.6;
     }
 
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .stat-pill {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      padding: 1rem 2rem;
-      border-radius: var(--radius);
-      min-width: 160px;
-    }
-
-    .stat-pill .value {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .stat-pill .label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.2rem;
-    }
-
-    /* ==================== FILTRES & CONTROLES ==================== */
+    /* FILTRES */
     .controls {
       display: flex;
       gap: 1rem;
@@ -188,7 +166,7 @@
       flex-wrap: wrap;
     }
 
-    select {
+    select, input[type="text"] {
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-main);
@@ -196,10 +174,9 @@
       border-radius: var(--radius);
       font-size: 0.95rem;
       outline: none;
-      cursor: pointer;
     }
 
-    /* ==================== GRILLE & CARTES ==================== */
+    /* GRILLE & CARTES */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -214,14 +191,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
       backdrop-filter: blur(12px);
     }
 
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
       border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
 
     .tag-badge {
@@ -258,8 +234,6 @@
       text-align: center;
       transition: opacity 0.2s;
       width: 100%;
-      text-decoration: none;
-      display: inline-block;
     }
 
     .btn:hover {
@@ -272,7 +246,7 @@
       color: var(--text-main);
     }
 
-    /* ==================== DETAIL VUE (LECON & QUIZ) ==================== */
+    /* VUE DETAIL (LECON & QUIZ) */
     .view-container {
       background: var(--bg-surface);
       border: 1px solid var(--border);
@@ -291,13 +265,13 @@
       margin-bottom: 1.25rem;
     }
 
-    /* QCM UI */
+    /* QUIZ UI */
     .question-card {
       background: var(--bg-base);
       border: 1px solid var(--border);
       padding: 1.75rem;
       border-radius: var(--radius);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .options-grid {
@@ -316,12 +290,10 @@
       border-radius: var(--radius);
       cursor: pointer;
       font-weight: 500;
-      transition: all 0.2s;
     }
 
     .option-btn:hover:not(:disabled) {
       border-color: var(--primary);
-      background: rgba(99, 102, 241, 0.1);
     }
 
     .option-btn.correct {
@@ -336,21 +308,53 @@
       color: #fca5a5;
     }
 
-    /* Profil & Système de Points */
-    .level-bar-container {
-      background: var(--bg-base);
-      border: 1px solid var(--border);
-      height: 16px;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 1rem 0;
+    /* MODAL D'ONBOARDING (OBLIGATOIRE A LA 1ÈRE CONNEXION) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 15, 25, 0.95);
+      backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
 
-    .level-bar-fill {
-      background: var(--primary-gradient);
-      height: 100%;
-      width: 0%;
-      transition: width 0.5s ease;
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .avatar-selector {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+
+    .avatar-opt {
+      font-size: 2rem;
+      background: var(--bg-base);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .avatar-opt.selected {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.2);
+      transform: scale(1.1);
     }
 
     footer {
@@ -365,6 +369,31 @@
 </head>
 <body>
 
+  <!-- MODAL ONBOARDING OBLIGATOIRE -->
+  <div id="onboarding-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Bienvenue sur EduLycée</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Configurez votre profil pour personnaliser votre espace d'étude.</p>
+      
+      <form onsubmit="submitOnboarding(event)">
+        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Votre Surnom</label>
+        <input type="text" id="input-nickname" placeholder="Ex: Alex" required style="width: 100%; margin-bottom: 1.25rem;">
+
+        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Votre Niveau Scolaire</label>
+        <select id="input-niveau" required style="width: 100%; margin-bottom: 1.25rem;">
+          <option value="Seconde">Seconde</option>
+          <option value="Première">Première</option>
+          <option value="Terminale">Terminale</option>
+        </select>
+
+        <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Choisissez un Avatar (10 choix)</label>
+        <div class="avatar-selector" id="avatar-grid"></div>
+
+        <button type="submit" class="btn" style="margin-top: 1rem;">Commencer mon apprentissage</button>
+      </form>
+    </div>
+  </div>
+
   <header>
     <div class="brand" onclick="switchTab('home')">EduLycée</div>
     <nav>
@@ -373,38 +402,26 @@
       <button id="nav-quizz" onclick="switchTab('quizz')">Quizz</button>
       <button id="nav-profile" onclick="switchTab('profile')">Profil</button>
     </nav>
-    <div class="xp-badge">
-      ⚡ <span id="user-xp-display">0 XP</span>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <div class="user-pill" onclick="switchTab('profile')">
+        <span id="nav-avatar">🎓</span>
+        <span id="nav-name" style="font-weight: 600; font-size: 0.9rem;">Élève</span>
+      </div>
+      <div class="xp-badge">⚡ <span id="user-xp-display">0 XP</span></div>
     </div>
   </header>
 
   <main>
-
-    <!-- PAGE D'ACCUEIL (LANDING PAGE) -->
+    <!-- ACCUEIL / HERO -->
     <section id="home-view" class="hero">
-      <h1 class="hero-title">Révisez le Lycée avec<br>Excellence et Rigueur</h1>
-      <p class="hero-subtitle">
-        Accédez instantanément à tous vos cours de Seconde, Première et Terminale. Entraînez-vous avec des quiz interactifs et gagnez de l'expérience au quotidien.
+      <h1 class="hero-title" id="welcome-title">Révisez avec Rigueur et Succès</h1>
+      <p class="hero-subtitle" id="welcome-subtitle">
+        Accédez à l'ensemble de vos cours et évaluez vos connaissances grâce à nos séries de QCM interactifs.
       </p>
 
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <button class="btn" onclick="switchTab('lecons')" style="width: auto; padding: 1rem 2.5rem; font-size: 1.1rem;">Explorer les cours</button>
-        <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; padding: 1rem 2.5rem; font-size: 1.1rem;">Tester mes connaissances</button>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat-pill">
-          <div class="value">3 Niveaux</div>
-          <div class="label">2nde, 1re, Terminale</div>
-        </div>
-        <div class="stat-pill">
-          <div class="value">10 Max</div>
-          <div class="label">Questions par Quiz</div>
-        </div>
-        <div class="stat-pill">
-          <div class="value">100% Direct</div>
-          <div class="label">Données GitHub en temps réel</div>
-        </div>
+        <button class="btn" onclick="switchTab('lecons')" style="width: auto; padding: 1rem 2.5rem;">Voir mes cours conseillés</button>
+        <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; padding: 1rem 2.5rem;">Passer un quiz</button>
       </div>
     </section>
 
@@ -429,62 +446,114 @@
       </select>
     </div>
 
-    <!-- GRILLE PRINCIPALE (COURS & QUIZ) -->
+    <!-- GRILLE DE CARTES -->
     <div id="grid-view" class="grid hidden"></div>
 
     <!-- VUE DÉTAILLÉE -->
     <div id="detail-view" class="view-container hidden"></div>
 
-    <!-- PROFIL & GAMIFICATION -->
+    <!-- VUE PROFIL -->
     <div id="profile-view" class="view-container hidden"></div>
-
   </main>
 
   <footer>
-    <p>&copy; 2026 EduLycée — Plateforme d'apprentissage dynamique synchronisée avec GitHub</p>
+    <p>&copy; 2026 EduLycée — Plateforme d'apprentissage officielle du Lycée</p>
   </footer>
 
   <script>
-    // Configuration GitHub (À modifier avec vos identifiants)
-    const GITHUB_CONFIG = {
-      username: "VOTRE_NOM_UTILISATEUR",
-      repository: "VOTRE_DEPOT",
-      branch: "main"
-    };
+    // URL directe vers votre base de données distante
+    const DATA_SOURCE_URL = "https://raw.githubusercontent.com/VOTRE_NOM_UTILISATEUR/VOTRE_DEPOT/main/";
 
-    const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/${GITHUB_CONFIG.branch}/`;
+    const AVATARS = ['🚀', '🧠', '🦉', '🎓', '⚡', '🔬', '📚', '💻', '🎨', '🏆'];
+    let selectedAvatarIndex = 0;
 
     let currentTab = 'home';
     let rawLeconsData = [];
     let rawQuizzData = [];
 
-    // Profil local
     let userProfile = {
+      firstConnection: true,
+      nickname: '',
+      niveau: 'Seconde',
+      avatar: '🎓',
       xp: 0,
       leconsTerminees: [],
       scoreQuizzCorrect: 0
     };
 
     window.addEventListener('DOMContentLoaded', () => {
+      initAvatars();
       loadProfile();
-      loadGitHubData();
+      fetchData();
     });
 
+    // Initialisation de la grille d'avatars
+    function initAvatars() {
+      const grid = document.getElementById('avatar-grid');
+      grid.innerHTML = '';
+      AVATARS.forEach((av, idx) => {
+        const div = document.createElement('div');
+        div.className = `avatar-opt ${idx === 0 ? 'selected' : ''}`;
+        div.innerText = av;
+        div.onclick = () => selectAvatar(idx);
+        grid.appendChild(div);
+      });
+    }
+
+    function selectAvatar(idx) {
+      selectedAvatarIndex = idx;
+      document.querySelectorAll('.avatar-opt').forEach((el, i) => {
+        el.classList.toggle('selected', i === idx);
+      });
+    }
+
+    // Gestion du profil local
     function loadProfile() {
-      const saved = localStorage.getItem('edulycee_user_data');
+      const saved = localStorage.getItem('edulycee_profile_v2');
       if (saved) {
         userProfile = JSON.parse(saved);
       }
-      updateXPDisplay();
+
+      if (userProfile.firstConnection) {
+        document.getElementById('onboarding-modal').classList.remove('hidden');
+      } else {
+        applyProfileUI();
+      }
     }
 
     function saveProfile() {
-      localStorage.setItem('edulycee_user_data', JSON.stringify(userProfile));
-      updateXPDisplay();
+      localStorage.setItem('edulycee_profile_v2', JSON.stringify(userProfile));
+      applyProfileUI();
     }
 
-    function updateXPDisplay() {
+    function applyProfileUI() {
+      document.getElementById('nav-avatar').innerText = userProfile.avatar;
+      document.getElementById('nav-name').innerText = userProfile.nickname;
       document.getElementById('user-xp-display').innerText = `${userProfile.xp} XP`;
+
+      // Adaptation dynamique de la page d'accueil selon le niveau choisi
+      document.getElementById('welcome-title').innerText = `Révisez le programme de ${userProfile.niveau}`;
+      document.getElementById('welcome-subtitle').innerText = `Bonjour ${userProfile.nickname} ! Retrouvez vos cours et quiz spécialement adaptés à votre classe.`;
+
+      // Pré-positionnement automatique du filtre
+      document.getElementById('filter-niveau').value = userProfile.niveau;
+    }
+
+    function submitOnboarding(e) {
+      e.preventDefault();
+      const nick = document.getElementById('input-nickname').value.trim();
+      const niv = document.getElementById('input-niveau').value;
+
+      if (!nick) return;
+
+      userProfile.nickname = nick;
+      userProfile.niveau = niv;
+      userProfile.avatar = AVATARS[selectedAvatarIndex];
+      userProfile.firstConnection = false;
+
+      saveProfile();
+      document.getElementById('onboarding-modal').classList.add('hidden');
+      renderGrid();
     }
 
     function addXP(amount) {
@@ -492,23 +561,23 @@
       saveProfile();
     }
 
-    // Récupération sans cache
-    async function loadGitHubData() {
-      const noCacheQuery = `?nocache=${Date.now()}`;
+    // Récupération sécurisée et instantanée des données
+    async function fetchData() {
+      const cacheBuster = `?nocache=${Date.now()}`;
       try {
-        const [resLecons, resQuizz] = await Promise.all([
-          fetch(BASE_URL + 'lecons.json' + noCacheQuery),
-          fetch(BASE_URL + 'quizz.json' + noCacheQuery)
+        const [resL, resQ] = await Promise.all([
+          fetch(DATA_SOURCE_URL + 'lecons.json' + cacheBuster).catch(() => null),
+          fetch(DATA_SOURCE_URL + 'quizz.json' + cacheBuster).catch(() => null)
         ]);
 
-        if (resLecons.ok) rawLeconsData = await resLecons.json();
-        if (resQuizz.ok) rawQuizzData = await resQuizz.json();
+        if (resL && resL.ok) rawLeconsData = await resL.json();
+        if (resQ && resQ.ok) rawQuizzData = await resQ.json();
       } catch (err) {
-        console.warn("Données distantes non disponibles pour le moment.");
+        console.warn("Connexion aux cours en direct en attente.");
       }
     }
 
-    // Gestion de la navigation
+    // Navigation entre onglets
     function switchTab(tab) {
       currentTab = tab;
 
@@ -531,7 +600,7 @@
       renderGrid();
     }
 
-    // Rendu de la grille des leçons ou quiz
+    // Affichage des cartes de cours ou de quiz
     function renderGrid() {
       const grid = document.getElementById('grid-view');
       grid.innerHTML = '';
@@ -548,7 +617,10 @@
       });
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">Aucun élément disponible dans la base GitHub pour ces filtres.</div>`;
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">
+            Aucun contenu trouvé pour le niveau <strong>${niveauFilter}</strong>.
+          </div>`;
         return;
       }
 
@@ -563,14 +635,13 @@
             <p>${item.description || (item.questions ? item.questions.length + ' questions' : '')}</p>
           </div>
           <button class="btn" onclick="openDetail('${item.id}')">
-            ${currentTab === 'lecons' ? (isDone ? 'Revoir la leçon' : 'Étudier la leçon') : 'Démarrer le quiz'}
+            ${currentTab === 'lecons' ? (isDone ? 'Revoir la leçon' : 'Étudier la leçon') : 'Lancer le quiz'}
           </button>
         `;
         grid.appendChild(card);
       });
     }
 
-    // Ouverture détaillée
     function openDetail(id) {
       document.getElementById('controls-bar').classList.add('hidden');
       document.getElementById('grid-view').classList.add('hidden');
@@ -588,22 +659,26 @@
       if (window.MathJax) MathJax.typesetPromise();
     }
 
-    // Affichage des leçons
     function renderLeconDetail(item, container) {
       const isCompleted = userProfile.leconsTerminees.includes(item.id);
 
-      let textContent = '';
-      if (Array.isArray(item.texte)) {
-        textContent = item.texte.map(p => `<p class="lesson-paragraph">${p}</p>`).join('');
-      } else {
-        textContent = `<p class="lesson-paragraph">${item.texte}</p>`;
+      // Support des deux formats JSON (paragraphes ou blocs)
+      let contentHTML = '';
+      if (item.texte) {
+        if (Array.isArray(item.texte)) {
+          contentHTML = item.texte.map(p => `<p class="lesson-paragraph">${p}</p>`).join('');
+        } else {
+          contentHTML = `<p class="lesson-paragraph">${item.texte}</p>`;
+        }
+      } else if (item.contenu) {
+        contentHTML = item.contenu.map(c => `<p class="lesson-paragraph"><strong>${c.titre || ''}</strong> ${c.texte}</p>`).join('');
       }
 
       container.innerHTML = `
         <button class="btn btn-secondary" onclick="switchTab('lecons')" style="width: auto; margin-bottom: 2rem;">← Retour aux cours</button>
         <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
-        <h1 style="font-size: 2.2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
-        <div style="margin-bottom: 2.5rem;">${textContent}</div>
+        <h1 style="font-size: 2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
+        <div style="margin-bottom: 2.5rem;">${contentHTML}</div>
         <button id="btn-complete" class="btn" onclick="markLessonComplete('${item.id}')" ${isCompleted ? 'disabled style="background: var(--bg-surface); border:1px solid var(--success); color:var(--success);"' : ''}>
           ${isCompleted ? '✓ Leçon validée (+50 XP)' : 'Marquer comme terminée (+50 XP)'}
         </button>
@@ -620,20 +695,19 @@
       }
     }
 
-    // Affichage des quiz (Max 10 questions, 4 choix)
     function renderQuizDetail(item, container) {
       const questionsToDisplay = item.questions.slice(0, 10);
 
       let html = `
         <button class="btn btn-secondary" onclick="switchTab('quizz')" style="width: auto; margin-bottom: 2rem;">← Retour aux quiz</button>
         <span class="tag-badge">${item.niveau} • ${item.matiere}</span>
-        <h1 style="font-size: 2.2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
+        <h1 style="font-size: 2rem; margin: 1rem 0 2rem 0;">${item.titre}</h1>
       `;
 
       questionsToDisplay.forEach((q, qIndex) => {
         html += `
           <div class="question-card" id="q-card-${qIndex}">
-            <p style="font-weight: 700; font-size: 1.1rem;">Question ${qIndex + 1} : ${q.question}</p>
+            <p style="font-weight: 700;">Question ${qIndex + 1} : ${q.question}</p>
             <div class="options-grid">
               ${q.options.slice(0, 4).map((opt, oIndex) => `
                 <button class="option-btn" onclick="checkAnswer(${qIndex}, ${oIndex}, ${q.reponseCorrecte}, '${encodeURIComponent(q.explication)}')">
@@ -673,50 +747,40 @@
       }
     }
 
-    // Affichage du Profil et Système de Niveaux
     function renderProfile() {
-      const currentLevel = Math.floor(userProfile.xp / 100) + 1;
-      const progressInLevel = userProfile.xp % 100;
-
       const container = document.getElementById('profile-view');
       container.innerHTML = `
-        <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Votre Progression</h1>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">Suivez votre rang et vos statistiques d'apprentissage.</p>
-
-        <div style="background: var(--bg-base); border: 1px solid var(--border); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
-          <div style="display: flex; justify-content: space-between; font-weight: 700;">
-            <span>Niveau ${currentLevel}</span>
-            <span>${progressInLevel} / 100 XP</span>
-          </div>
-          <div class="level-bar-container">
-            <div class="level-bar-fill" style="width: ${progressInLevel}%;"></div>
+        <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+          <div style="font-size: 3.5rem; background: var(--bg-base); border: 1px solid var(--border); padding: 0.5rem; border-radius: var(--radius);">${userProfile.avatar}</div>
+          <div>
+            <h1 style="font-size: 2rem;">${userProfile.nickname}</h1>
+            <p style="color: var(--text-muted);">Niveau de référence : <strong>${userProfile.niveau}</strong></p>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
           <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-            <div style="color: var(--text-muted); font-size: 0.85rem;">XP Totale</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: var(--gold); margin-top: 0.25rem;">${userProfile.xp}</div>
+            <div style="color: var(--text-muted); font-size: 0.85rem;">Points d'expérience</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--gold);">${userProfile.xp} XP</div>
           </div>
           <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-            <div style="color: var(--text-muted); font-size: 0.85rem;">Cours Terminés</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-top: 0.25rem;">${userProfile.leconsTerminees.length}</div>
+            <div style="color: var(--text-muted); font-size: 0.85rem;">Cours Validés</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">${userProfile.leconsTerminees.length}</div>
           </div>
           <div style="background: var(--bg-base); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); text-align: center;">
-            <div style="color: var(--text-muted); font-size: 0.85rem;">Réponses Correctes</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: var(--success); margin-top: 0.25rem;">${userProfile.scoreQuizzCorrect}</div>
+            <div style="color: var(--text-muted); font-size: 0.85rem;">Quiz Reussis</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--success);">${userProfile.scoreQuizzCorrect}</div>
           </div>
         </div>
 
-        <button class="btn btn-secondary" onclick="resetData()" style="border-color: var(--danger); color: var(--danger); width: auto;">Réinitialiser ma progression</button>
+        <button class="btn btn-secondary" onclick="resetProfile()" style="border-color: var(--danger); color: var(--danger); width: auto;">Changer de profil / Réinitialiser</button>
       `;
     }
 
-    function resetData() {
-      if (confirm("Voulez-vous réinitialiser l'intégralité de vos points XP et leçons validées ?")) {
-        userProfile = { xp: 0, leconsTerminees: [], scoreQuizzCorrect: 0 };
-        saveProfile();
-        renderProfile();
+    function resetProfile() {
+      if (confirm("Voulez-vous modifier votre profil ou réinitialiser vos données ?")) {
+        localStorage.removeItem('edulycee_profile_v2');
+        location.reload();
       }
     }
   </script>
